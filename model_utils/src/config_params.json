@@ -1,0 +1,67 @@
+{
+  "backtest_config": {
+    "dates": {
+      "DAM":{
+        "s_date": "01-01-2020",
+        "e_date": "01-01-2023"
+      },
+    "RTM":{
+        "s_date": "01-01-2021",
+        "e_date": "01-01-2023"
+      },
+      "DAM_backtest_lookback": 365,
+      "RTM_backtest_lookback": 365,
+      "retrain_freq": 7,
+      "RTM_data_freq_min": 15
+    },
+    "test_train_split": {
+      "train_pct": 0.7,
+      "test_location": "rear"
+    },
+    "regions":[ 
+        "HB_HOUSTON", "HB_NORTH", "HB_PAN", "HB_SOUTH"
+      ]
+  },
+  "iso": "ERCOT",
+  "DAM": {
+    "model_family": "XGBoost",
+    "model_type": "regression",
+    "api_version": "sk-learn",
+    "model_params": {
+      "n_estimators": 500,
+      "max_depth": 6,
+      "objective": "reg:squarederror",
+      "early_stopping_rounds": 10,
+      "eval_metric": "rmse",
+      "booster": "gbtree",
+      "n_jobs": 8,
+      "verbose": 0,
+      "random_state": 42
+    }
+  },
+  "RTM": {
+    "model_family": "XGBoost",
+    "model_type": "regression",
+    "api_version": "sk-learn",
+    "model_params": {
+      "n_estimators": 500,
+      "max_depth": 6,
+      "learning_rate": 0.1,
+      "objective": "reg:squarederror",
+      "early_stopping_rounds": 10,
+      "eval_metric": "rmse",
+      "booster": "gbtree",
+      "n_jobs": 8,
+      "verbose": 1,
+      "random_state": 42
+    }
+  },
+  "scaler": {
+    "numerical_scaler": {
+      "scaler_type": "MinMaxScaler",
+      "config": {
+        "feature_range": [-1, 1]
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+*.pyc
+docker_secrets.*
+secrets.*
+docker_secrets/*
+docker_secrets
